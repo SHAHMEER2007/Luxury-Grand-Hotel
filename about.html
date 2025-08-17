@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Luxury Grand Hotel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', Serif Text;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+
+        .container p {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #000000;
+        }
+
+        /* Navigation */
+        /* Enhanced Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(200deg, #ded2a9, #e9ecef);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 0.5rem 0;
+            border-bottom: 3px solid #d4af37;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: linear-gradient(200deg, rgba(222, 210, 169, 0.95), rgba(233, 236, 239, 0.95));
+            padding: 0.5rem 0;
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -12px;
+            right: -12px;
+            bottom: -8px;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover::before {
+            opacity: 1;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.5));
+            transform: scale(1.02);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: #fff;
+                box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+                z-index: 1001;
+            }
+
+            .menu-toggle:checked~.nav-links {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid,
+            .rooms-grid,
+            .testimonials-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                height: 250px;
+                padding-top: 40px;
+                font-size: 4rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+             font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(26, 25, 25, 0.442);
+            background: linear-gradient(135deg, #d4af37, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            align-items: center;
+            background-color: #cccbc8;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: left;
+            text-shadow: 2px 2px 4px rgba(26, 25, 25, 0.442);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: left;
+        }
+
+        .about-image {
+            background-image: url(https://images.pexels.com/photos/53464/sheraton-palace-hotel-lobby-architecture-san-francisco-53464.jpeg?cs=srgb&dl=pexels-pixabay-53464.jpg&fm=jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 500px;
+            border-radius: 10px;
+            padding-top: 100px;
+            text-align: center;
+            font-size: 8rem;
+            color: #d4af37;
+        }
+
+        /* Enhanced Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 3rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem 0rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .stat-suffix {
+            font-size: 2.5rem;
+            color: #d4af37;
+            font-weight: bold;
+            margin-left: 0.2rem;
+        }
+
+        .stat-label {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #ffffff;
+        }
+
+        .stat-description {
+            font-size: 1rem;
+            color: #cccccc;
+            line-height: 1.5;
+        }
+
+        /* Enhanced Team Section */
+        .team-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #cccbc8 0%, #e9ecef 100%);
+        }
+
+        .section-title{
+            text-shadow: 2px 2px 4px rgba(26, 25, 25, 0.442);
+            
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            border-top: 5px solid #d4af37;
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-image {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.95), rgba(244, 208, 63, 0.95));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .team-member:hover .member-overlay {
+            opacity: 1;
+        }
+
+        .contact-info {
+            text-align: center;
+            color: white;
+            font-weight: 500;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .member-info {
+            padding: 2.5rem;
+        }
+
+        .member-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-position {
+            font-size: 1.1rem;
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .member-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .member-achievements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #555;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .achievement:hover {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+
+
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./png-clipart-gold-letter-l-letters-abc-alphabet-l-miscellaneous-english-thumbnail.png"
+                    alt="Luxury Grand Hotel" /> Luxury Grand Hotel
+            </div>
+            <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+            <label for="menu-toggle" class="mobile-menu-btn">☰</label>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>About Our Hotel</h1>
+            <p>Discover the story behind our commitment to luxury and exceptional hospitality</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container" style="background-color: #cccbc8;">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Since 1985, Luxury Grand Hotel has been synonymous with elegance, comfort, and world-class service.
+                    What began as a vision to create the perfect hospitality experience has evolved into a landmark
+                    destination.</p>
+                <p>Our commitment to excellence is reflected in every detail, from our meticulously designed rooms to
+                    our award-winning dining experiences. We believe that luxury is not just about amenities, but about
+                    creating unforgettable moments for our guests.</p>
+                <p>Today, we continue to set the standard for luxury hospitality, combining timeless elegance with
+                    modern innovation to exceed our guests' expectations.</p>
+            </div>
+            <div class="about-image">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Our Legacy in Numbers</h2>
+            <p class="section-subtitle" style="color: #ffffff;">Decades of excellence reflected in our achievements and
+                guest satisfaction</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">Years of Excellence</div>
+                    <div class="stat-description">Serving luxury hospitality since 1999</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number">98<span class="stat-suffix">%</span></div>
+                    <div class="stat-label">Guest Satisfaction</div>
+                    <div class="stat-description">Based on 50,000+ reviews</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🌟</div>
+                    <div class="stat-number">150<span class="stat-suffix">+</span></div>
+                    <div class="stat-label">Awards Won</div>
+                    <div class="stat-description">International hospitality recognition</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number">500<span class="stat-suffix">K+</span></div>
+                    <div class="stat-label">Happy Guests</div>
+                    <div class="stat-description">Lifetime memorable experiences</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏨</div>
+                    <div class="stat-number">200</div>
+                    <div class="stat-label">Luxury Suites</div>
+                    <div class="stat-description">Each uniquely designed</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-number">85</div>
+                    <div class="stat-label">Countries Served</div>
+                    <div class="stat-description">Global clientele from around the world</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Leadership Team</h2>
+            <p class="section-subtitle">Exceptional leaders dedicated to delivering unparalleled luxury experiences</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://media.istockphoto.com/id/478335468/photo/portrait-of-confident-mature-businessman.jpg?s=612x612&w=0&k=20&c=oO000MseNVEAAr2tz_bvspgMqEIe8QCrsiQHInw9x1E="
+                            alt="James Richardson">
+                        <div class="member-overlay">
+                            <div class="contact-info">
+                                <p>📧 j.richardson@luxurygrand.com</p>
+                                <p>📞 +1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">James Richardson</h3>
+                        <p class="member-position">General Manager</p>
+                        <p class="member-description">With over 20 years in luxury hospitality, James leads our team
+                            with passion for excellence and guest satisfaction.</p>
+                        <div class="member-achievements">
+                            <span class="achievement">🏆 Hospitality Leader 2023</span>
+                            <span class="achievement">📚 MBA Harvard Business</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://media.istockphoto.com/id/876397136/photo/modern-arabic-woman-with-digital-tablet.jpg?s=612x612&w=0&k=20&c=6Op7tKqeDNGT7CRSnoJFW_DyJFb5NZoUl_Y8tI7qqJU="
+                            alt="Sarah Chen">
+                        <div class="member-overlay">
+                            <div class="contact-info">
+                                <p>📧 s.chen@luxurygrand.com</p>
+                                <p>📞 +1 (555) 123-4568</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Sarah Chen</h3>
+                        <p class="member-position">Director of Guest Experience</p>
+                        <p class="member-description">Sarah ensures every guest receives personalized attention and
+                            creates unforgettable memories during their stay.</p>
+                        <div class="member-achievements">
+                            <span class="achievement">⭐ Guest Service Excellence</span>
+                            <span class="achievement">🌟 5-Star Rating Leader</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://media.istockphoto.com/id/1498456427/photo/headshot-of-happy-young-businessman.jpg?s=612x612&w=0&k=20&c=P7CV5e6C2rbuNh4WuTQBN9gP8hW-WYWFrVLWmpx5UsI="
+                            alt="Michael Torres">
+                        <div class="member-overlay">
+                            <div class="contact-info">
+                                <p>📧 m.torres@luxurygrand.com</p>
+                                <p>📞 +1 (555) 123-4569</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Michael Torres</h3>
+                        <p class="member-position">Executive Chef</p>
+                        <p class="member-description">Michelin-starred chef bringing innovative culinary experiences and
+                            world-class dining to our guests.</p>
+                        <div class="member-achievements">
+                            <span class="achievement">⭐ Michelin Star Chef</span>
+                            <span class="achievement">🍽️ Culinary Arts Master</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Emma Williams">
+                        <div class="member-overlay">
+                            <div class="contact-info">
+                                <p>📧 e.williams@luxurygrand.com</p>
+                                <p>📞 +1 (555) 123-4570</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Emma Williams</h3>
+                        <p class="member-position">VIP Services Director</p>
+                        <p class="member-description">Emma oversees our exclusive VIP services, ensuring our most
+                            discerning guests receive exceptional treatment.</p>
+                        <div class="member-achievements">
+                            <span class="achievement">👑 VIP Excellence Award</span>
+                            <span class="achievement">🎯 Luxury Service Expert</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://media.istockphoto.com/id/1325164545/photo/portrait-of-mature-business-men-wearing-suit-standing-against-gray-background-stock-photo.jpg?s=612x612&w=0&k=20&c=W-dzq5Y-npRbjIoKUzBt81frrsRsY84BYWH80enx3Hk="
+                            alt="David Park">
+                        <div class="member-overlay">
+                            <div class="contact-info">
+                                <p>📧 d.park@luxurygrand.com</p>
+                                <p>📞 +1 (555) 123-4571</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">David Park</h3>
+                        <p class="member-position">Operations Manager</p>
+                        <p class="member-description">David ensures seamless daily operations and maintains the highest
+                            standards across all hotel departments.</p>
+                        <div class="member-achievements">
+                            <span class="achievement">⚙️ Operations Excellence</span>
+                            <span class="achievement">📊 Efficiency Expert</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Lisa Anderson">
+                        <div class="member-overlay">
+                            <div class="contact-info">
+                                <p>📧 l.anderson@luxurygrand.com</p>
+                                <p>📞 +1 (555) 123-4572</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Lisa Anderson</h3>
+                        <p class="member-position">Spa & Wellness Director</p>
+                        <p class="member-description">Lisa creates transformative wellness experiences, leading our
+                            award-winning spa and wellness programs.</p>
+                        <div class="member-achievements">
+                            <span class="achievement">🧘 Wellness Expert</span>
+                            <span class="achievement">💆 Spa Excellence Award</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Luxury Grand Hotel</h3>
+                    <p>Experience the finest in hospitality and luxury accommodation.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="about.html">About Us</a>
+                    <a href="rooms.html">Rooms & Suites</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Spa & Wellness</a>
+                    <a href="#">Fine Dining</a>
+                    <a href="#">Conference Rooms</a>
+                    <a href="#">Concierge Service</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📧 info@luxurygrand.com</p>
+                    <p>📍 123 Luxury Avenue<br>Grand City, GC 12345</p>
+                </div>
+            </div>
+            <p>&copy; 2025 Luxury Grand Hotel. All rights reserved.</p>
+        </div>
+    </footer>
+      <!-- Simple Footer -->
+    <footer style="background: #2c3e50; color: white; text-align: center; padding: 1rem; font-family: 'Montserrat', sans-serif;">
+        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+            Presented by <strong style="color: #f7ce48;">SHAHMEER</strong> | Web Development Project
+        </p>
+    </footer>
+    </body>
+</html>

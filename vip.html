@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Services - Luxury Grand Hotel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', Serif Text;
+            line-height: 1.6;
+            color: #333;
+            background-color: #cccbc8;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(200deg, #ded2a9, #e9ecef);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 0.5rem 0;
+            border-bottom: 3px solid #d4af37;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: linear-gradient(200deg, rgba(222, 210, 169, 0.95), rgba(233, 236, 239, 0.95));
+            padding: 0.5rem 0;
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -12px;
+            right: -12px;
+            bottom: -8px;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover::before {
+            opacity: 1;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.5));
+            transform: scale(1.02);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: #fff;
+                box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+                z-index: 1001;
+            }
+
+            .menu-toggle:checked~.nav-links {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid,
+            .rooms-grid,
+            .testimonials-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .vip-services {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+              font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(26, 25, 25, 0.442);
+            background: linear-gradient(135deg, #d4af37, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* VIP Services Grid */
+        .vip-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .service-content {
+            padding: 2.5rem;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .learn-more-btn {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Premium Packages Section */
+        .premium-packages {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 5rem 0;
+            margin: 5rem 0;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .package-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card.featured {
+            border: 3px solid #d4af37;
+            transform: scale(1.05);
+        }
+
+        .package-card.featured:before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #d4af37;
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .package-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-duration {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .package-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .package-features li:before {
+            content: "👑";
+            position: absolute;
+            left: 0;
+        }
+
+        .select-package-btn {
+            background: #d4af37;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .select-package-btn:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .vip-services {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./png-clipart-gold-letter-l-letters-abc-alphabet-l-miscellaneous-english-thumbnail.png"
+                    alt="Luxury Grand Hotel" /> Luxury Grand Hotel
+            </div>
+            <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+            <label for="menu-toggle" class="mobile-menu-btn">☰</label>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>VIP Services</h1>
+            <p>Experience unparalleled luxury with our exclusive VIP services designed for the most discerning guests
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="section-title">Exclusive VIP Experiences</h2>
+        <p class="section-subtitle">Our VIP services are crafted to exceed your highest expectations, providing
+            personalized attention and exclusive access to premium amenities that define true luxury hospitality.</p>
+
+        <div class="vip-services">
+            <!-- Personal Butler Service -->
+            <div class="service-card">
+                <div class="service-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="service-badge">24/7 Available</div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">🎩</div>
+                    <h3 class="service-title">Personal Butler Service</h3>
+                    <p class="service-description">Your dedicated personal butler provides discreet, professional
+                        service tailored to your every need, ensuring a seamless and luxurious experience throughout
+                        your stay.</p>
+                    <ul class="service-features">
+                        <li>24/7 personal assistance</li>
+                        <li>Unpacking and packing services</li>
+                        <li>Restaurant reservations</li>
+                        <li>Personal shopping assistance</li>
+                        <li>Event planning and coordination</li>
+                    </ul>
+                    <button class="learn-more-btn">Request Butler Service</button>
+                </div>
+            </div>
+
+            <!-- Private Jet & Limousine -->
+            <div class="service-card">
+                <div class="service-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="service-badge">Premium Transport</div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">✈️</div>
+                    <h3 class="service-title">Private Transportation</h3>
+                    <p class="service-description">Travel in ultimate comfort with our fleet of luxury vehicles and
+                        private jet services, ensuring your journey is as exceptional as your destination.</p>
+                    <ul class="service-features">
+                        <li>Private jet charter services</li>
+                        <li>Luxury limousine fleet</li>
+                        <li>Helicopter transfers</li>
+                        <li>Yacht charter arrangements</li>
+                        <li>Professional chauffeur service</li>
+                    </ul>
+                    <button class="learn-more-btn">Book Transportation</button>
+                </div>
+            </div>
+
+            <!-- Exclusive Dining -->
+            <div class="service-card">
+                <div class="service-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="service-badge">Michelin Star</div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">🍽️</div>
+                    <h3 class="service-title">Private Chef Experience</h3>
+                    <p class="service-description">Indulge in personalized culinary experiences with our world-renowned
+                        chefs who create bespoke menus tailored to your preferences and dietary requirements.</p>
+                    <ul class="service-features">
+                        <li>Private chef in your suite</li>
+                        <li>Customized menu creation</li>
+                        <li>Wine pairing consultations</li>
+                        <li>Exclusive restaurant access</li>
+                        <li>Cooking classes available</li>
+                    </ul>
+                    <button class="learn-more-btn">Reserve Chef Service</button>
+                </div>
+            </div>
+
+            <!-- Spa & Wellness -->
+            <div class="service-card">
+                <div class="service-image"
+                    style="background-image: url(https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+                    <div class="service-badge">Wellness Retreat</div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">💆‍♀️</div>
+                    <h3 class="service-title">Private Spa Sanctuary</h3>
+                    <p class="service-description">Rejuvenate in your own private spa suite with exclusive treatments
+                        designed by world-class therapists using the finest organic and luxury products.</p>
+                    <ul class="service-features">
+                        <li>Private spa suite access</li>
+                        <li>Personalized treatment programs</li>
+                        <li>Master therapist sessions</li>
+                        <li>Luxury product selection</li>
+                        <li>Wellness consultation included</li>
+                    </ul>
+                    <button class="learn-more-btn">Book Spa Experience</button>
+                </div>
+            </div>
+
+            <!-- Concierge Services -->
+            <div class="service-card">
+                <div class="service-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YnVzaW5lc3MlMjBtYW58ZW58MHwwfDB8fHwwhttps://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="service-badge">Les Clefs d'Or</div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">🗝️</div>
+                    <h3 class="service-title">Elite Concierge</h3>
+                    <p class="service-description">Our Les Clefs d'Or certified concierge team provides unparalleled
+                        access to exclusive experiences, events, and services throughout the city and beyond.</p>
+                    <ul class="service-features">
+                        <li>Exclusive event access</li>
+                        <li>VIP show and concert tickets</li>
+                        <li>Private museum tours</li>
+                        <li>Luxury shopping experiences</li>
+                        <li>Cultural experience curation</li>
+                    </ul>
+                    <button class="learn-more-btn">Contact Concierge</button>
+                </div>
+            </div>
+
+            <!-- Business Services -->
+            <div class="service-card">
+                <div class="service-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="service-badge">Executive Level</div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">💼</div>
+                    <h3 class="service-title">Executive Business Center</h3>
+                    <p class="service-description">Conduct business seamlessly with our state-of-the-art facilities,
+                        dedicated staff, and comprehensive services designed for high-level executives.</p>
+                    <ul class="service-features">
+                        <li>Private meeting rooms</li>
+                        <li>Executive assistant services</li>
+                        <li>High-tech presentation facilities</li>
+                        <li>Confidential document handling</li>
+                        <li>International communication support</li>
+                    </ul>
+                    <button class="learn-more-btn">Reserve Business Services</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Packages -->
+    <section class="premium-packages">
+        <div class="container">
+            <h2 class="section-title">VIP Experience Packages</h2>
+            <p class="section-subtitle">Choose from our curated VIP packages designed to provide the ultimate luxury
+                experience</p>
+
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3 class="package-title">Gold VIP</h3>
+                    <div class="package-price">$500</div>
+                    <div class="package-duration">per day</div>
+                    <ul class="package-features">
+                        <li>Personal butler (8 hours)</li>
+                        <li>Luxury car service</li>
+                        <li>Priority restaurant reservations</li>
+                        <li>Spa treatment credit ($200)</li>
+                        <li>Welcome champagne & amenities</li>
+                    </ul>
+                    <button class="select-package-btn">Select Gold VIP</button>
+                </div>
+
+                <div class="package-card featured">
+                    <h3 class="package-title">Platinum VIP</h3>
+                    <div class="package-price">$1,200</div>
+                    <div class="package-duration">per day</div>
+                    <ul class="package-features">
+                        <li>24/7 personal butler</li>
+                        <li>Private jet transfers</li>
+                        <li>Private chef experience</li>
+                        <li>Exclusive spa suite access</li>
+                        <li>VIP event tickets</li>
+                        <li>Personal shopping assistant</li>
+                    </ul>
+                    <button class="select-package-btn">Select Platinum VIP</button>
+                </div>
+
+                <div class="package-card">
+                    <h3 class="package-title">Diamond VIP</h3>
+                    <div class="package-price">$2,500</div>
+                    <div class="package-duration">per day</div>
+                    <ul class="package-features">
+                        <li>Complete VIP team</li>
+                        <li>Private yacht access</li>
+                        <li>Michelin star dining</li>
+                        <li>Helicopter city tours</li>
+                        <li>Exclusive cultural experiences</li>
+                        <li>Personal security detail</li>
+                        <li>Custom itinerary planning</li>
+                    </ul>
+                    <button class="select-package-btn">Select Diamond VIP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Luxury Grand Hotel</h3>
+                    <p>Experience the finest in hospitality and luxury accommodation.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="about.html">About Us</a>
+                    <a href="rooms.html">Rooms & Suites</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>VIP Services</h3>
+                    <a href="#">Personal Butler</a>
+                    <a href="#">Private Transportation</a>
+                    <a href="#">Exclusive Dining</a>
+                    <a href="#">Private Spa</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact VIP</h3>
+                    <p>📞 +1 (555) VIP-LUXE</p>
+                    <p>📧 vip@luxurygrand.com</p>
+                    <p>📍 VIP Lounge, Penthouse Level<br>Luxury Grand Hotel</p>
+                </div>
+            </div>
+            <p>&copy; 2025 Luxury Grand Hotel. All rights reserved.</p>
+        </div>
+    </footer>
+          <!-- Simple Footer -->
+    <footer style="background: #2c3e50; color: white; text-align: center; padding: 1rem; font-family: 'Montserrat', sans-serif;">
+        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+            Presented by <strong style="color: #f7ce48;">SHAHMEER</strong> | Web Development Project
+        </p>
+    </footer>
+</body>
+</html>

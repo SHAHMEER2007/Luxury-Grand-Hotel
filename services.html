@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Luxury Grand Hotel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', Serif Text;
+            line-height: 1.6;
+            color: #333;
+            background-color: #cccbc8;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        /* Enhanced Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(200deg, #ded2a9, #e9ecef);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 0.5rem 0;
+            border-bottom: 3px solid #d4af37;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: linear-gradient(200deg, rgba(222, 210, 169, 0.95), rgba(233, 236, 239, 0.95));
+            padding: 0.5rem 0;
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -12px;
+            right: -12px;
+            bottom: -8px;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover::before {
+            opacity: 1;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.5));
+            transform: scale(1.02);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: #fff;
+                box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+                z-index: 1001;
+            }
+
+            .menu-toggle:checked~.nav-links {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid,
+            .rooms-grid,
+            .testimonials-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+               font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(26, 25, 25, 0.442);
+            background: linear-gradient(135deg, #d4af37, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid #d4af37;
+        }
+
+        .service-card:hover {
+            background: #d4af37;
+            transition: 1000ms;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #666;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-btn {
+            background: #d4af37;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .service-btn a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .service-btn:hover {
+            background: #b8941f;
+        }
+
+        /* Premium Services */
+        .premium-section {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+            padding: 4rem 0;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .premium-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .premium-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .premium-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .premium-btn {
+            background: white;
+            color: #d4af37;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .premium-btn a {
+            text-decoration: none;
+            color: #d4af37;
+        }
+
+        .premium-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./png-clipart-gold-letter-l-letters-abc-alphabet-l-miscellaneous-english-thumbnail.png"
+                    alt="Luxury Grand Hotel" /> Luxury Grand Hotel
+            </div>
+            <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+            <label for="menu-toggle" class="mobile-menu-btn">☰</label>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Luxury Services</h1>
+            <p>Indulge in our world-class amenities and personalized services designed for your comfort</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="services-grid">
+            <!-- Spa & Wellness -->
+            <div class="service-card">
+                <div class="service-icon">🧘‍♀️</div>
+                <h3>Spa & Wellness</h3>
+                <p>Rejuvenate your body and mind at our award-winning spa facility with expert therapists and premium
+                    treatments.</p>
+                <ul class="service-features">
+                    <li>Full-body massages</li>
+                    <li>Facial treatments</li>
+                    <li>Aromatherapy sessions</li>
+                    <li>Yoga & meditation classes</li>
+                    <li>Sauna & steam rooms</li>
+                </ul>
+                <button class="service-btn"><a href="./contact.html">Book Treatment</a></button>
+            </div>
+
+            <!-- Fine Dining -->
+            <div class="service-card">
+                <div class="service-icon">🍽️</div>
+                <h3>Fine Dining</h3>
+                <p>Experience culinary excellence at our restaurants featuring international cuisine and award-winning
+                    chefs.</p>
+                <ul class="service-features">
+                    <li>Michelin-starred restaurant</li>
+                    <li>Rooftop bar & lounge</li>
+                    <li>Private dining rooms</li>
+                    <li>Wine tasting events</li>
+                    <li>24/7 room service</li>
+                </ul>
+                <button class="service-btn"><a href="./contact.html">Make Reservation</a></button>
+            </div>
+
+            <!-- Fitness Center -->
+            <div class="service-card">
+                <div class="service-icon">💪</div>
+                <h3>Fitness Center</h3>
+                <p>Stay active with our state-of-the-art fitness facilities and personal training services available
+                    24/7.</p>
+                <ul class="service-features">
+                    <li>Modern gym equipment</li>
+                    <li>Personal trainers</li>
+                    <li>Group fitness classes</li>
+                    <li>Indoor swimming pool</li>
+                    <li>Tennis court</li>
+                </ul>
+                <button class="service-btn"><a href="./contact.html">Schedule Workout</a></button>
+            </div>
+
+            <!-- Business Center -->
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Business Center</h3>
+                <p>Conduct business seamlessly with our fully equipped conference rooms and professional services.</p>
+                <ul class="service-features">
+                    <li>Conference rooms</li>
+                    <li>High-speed internet</li>
+                    <li>Printing & copying</li>
+                    <li>Video conferencing</li>
+                    <li>Secretary services</li>
+                </ul>
+                <button class="service-btn"><a href="./contact.html">Book Meeting Room</a></button>
+            </div>
+
+            <!-- Concierge Services -->
+            <div class="service-card">
+                <div class="service-icon">🎩</div>
+                <h3>Concierge Services</h3>
+                <p>Let our experienced concierge team assist you with reservations, tours, and special arrangements.</p>
+                <ul class="service-features">
+                    <li>Restaurant reservations</li>
+                    <li>Tour bookings</li>
+                    <li>Transportation arrangements</li>
+                    <li>Event planning</li>
+                    <li>Shopping assistance</li>
+                </ul>
+                <button class="service-btn"><a href="./contact.html">Contact Concierge</a></button>
+            </div>
+
+            <!-- Valet Services -->
+            <div class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>Valet & Transportation</h3>
+                <p>Enjoy convenient valet parking and luxury transportation services for all your travel needs.</p>
+                <ul class="service-features">
+                    <li>Valet parking</li>
+                    <li>Airport transfers</li>
+                    <li>Luxury car rentals</li>
+                    <li>Chauffeur services</li>
+                    <li>City tours</li>
+                </ul>
+                <button class="service-btn"><a href="./contact.html">Arrange Transport</a></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Services Section -->
+    <section class="premium-section">
+        <div class="premium-content">
+            <h2>VIP Premium Package</h2>
+            <p>Experience the ultimate in luxury with our exclusive VIP package including all premium services, personal
+                butler, and exclusive access to our private facilities.</p>
+            <button class="premium-btn"><a href="./vip.html">Learn More About VIP</a></button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Luxury Grand Hotel</h3>
+                    <p>Experience the finest in hospitality and luxury accommodation.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="about.html">About Us</a>
+                    <a href="rooms.html">Rooms & Suites</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Spa & Wellness</a>
+                    <a href="#">Fine Dining</a>
+                    <a href="#">Conference Rooms</a>
+                    <a href="#">Concierge Service</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📧 info@luxurygrand.com</p>
+                    <p>📍 123 Luxury Avenue<br>Grand City, GC 12345</p>
+                </div>
+            </div>
+            <p>&copy; 2025 Luxury Grand Hotel. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Simple Footer -->
+    <footer style="background: #2c3e50; color: white; text-align: center; padding: 1rem; font-family: 'Montserrat', sans-serif;">
+        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+            Presented by <strong style="color: #f7ce48;">SHAHMEER</strong> | Web Development Project
+        </p>
+    </footer>
+</body>
+
+</html>
