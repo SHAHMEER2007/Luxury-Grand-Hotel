@@ -34,11 +34,10 @@
         }
 
         /* Navigation */
-        /* Enhanced Navigation */
         nav {
             position: fixed;
             top: 0;
-            width: 100%;
+            width: 100vw;
             background: linear-gradient(200deg, #ded2a9, #e9ecef);
             backdrop-filter: blur(15px);
             z-index: 1000;
@@ -50,7 +49,6 @@
 
         nav.scrolled {
             background: linear-gradient(200deg, rgba(222, 210, 169, 0.95), rgba(233, 236, 239, 0.95));
-            padding: 0.5rem 0;
             box-shadow: 0 6px 25px rgba(212, 175, 55, 0.3);
         }
 
@@ -61,6 +59,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+            width: 100vw;
+            box-sizing: border-box;
         }
 
         .logo {
@@ -70,30 +70,8 @@
             font-weight: bold;
             color: #d4af37;
             position: relative;
-            transition: all 0.3s ease;
             cursor: pointer;
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: -12px;
-            right: -12px;
-            bottom: -8px;
-            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-            border-radius: 12px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo:hover::before {
-            opacity: 1;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s ease;
         }
 
         .logo img {
@@ -103,11 +81,6 @@
             object-fit: contain;
             margin-right: 0.5rem;
             transition: all 0.3s ease;
-        }
-
-        .logo:hover img {
-            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.5));
-            transform: scale(1.02);
         }
 
         .nav-links {
@@ -137,26 +110,7 @@
             text-transform: uppercase;
         }
 
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #d4af37, #f4d03f);
-            border-radius: 20px;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-
-        .nav-links a:hover::before {
-            opacity: 1;
-            transform: scale(1);
-        }
-
+        .nav-links a.active,
         .nav-links a:hover {
             color: #ffffff;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
@@ -165,7 +119,7 @@
 
         .nav-links a.active {
             background: linear-gradient(135deg, #d4af37, #f4d03f);
-            color: #ffffff;
+            color: #fff;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
@@ -174,7 +128,7 @@
             display: none;
             background: linear-gradient(135deg, #d4af37, #f4d03f);
             border: none;
-            color: #ffffff;
+            color: #fff;
             font-size: 1.5rem;
             cursor: pointer;
             padding: 0.8rem;
@@ -183,25 +137,42 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
 
-        .mobile-menu-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-        }
-
         .menu-toggle {
             display: none;
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+                max-width: 100vw;
+                width: 100vw;
+                box-sizing: border-box;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .logo img {
+                height: 30px;
+            }
+
             .nav-links {
                 display: none;
                 flex-direction: column;
                 position: absolute;
                 top: 60px;
-                right: 20px;
+                left: 1rem;
+                right: 1rem;
                 background: #fff;
                 box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
                 z-index: 1001;
+                border-radius: 16px;
+                padding: 1rem;
+                width: auto;
+                min-width: 220px;
             }
 
             .menu-toggle:checked~.nav-links {
@@ -238,6 +209,7 @@
 
             .about-grid {
                 grid-template-columns: 1fr;
+
                 gap: 2rem;
             }
 
@@ -277,7 +249,7 @@
         }
 
         .hero h1 {
-             font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 3rem;
             font-weight: 900;
             margin-bottom: 1rem;
@@ -290,7 +262,6 @@
         }
 
         .hero p {
-            
             font-size: 1.2rem;
             max-width: 600px;
         }
@@ -336,7 +307,7 @@
             color: #d4af37;
         }
 
-        /* Enhanced Stats Section */
+        /* Stats Section */
         .stats-section {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             padding: 3rem 0;
@@ -430,15 +401,14 @@
             line-height: 1.5;
         }
 
-        /* Enhanced Team Section */
+        /*  Team Section */
         .team-section {
             padding: 6rem 0;
             background: linear-gradient(135deg, #cccbc8 0%, #e9ecef 100%);
         }
 
-        .section-title{
+        .section-title {
             text-shadow: 2px 2px 4px rgba(26, 25, 25, 0.442);
-            
         }
 
         .team-grid {
@@ -557,15 +527,16 @@
             transform: translateY(-2px);
         }
 
-
-
-
         /* Footer */
         footer {
             background: #333;
             color: white;
             padding: 3rem 0;
             text-align: center;
+            width: 100vw;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            line-height: 1.5;
         }
 
         .footer-content {
@@ -597,7 +568,23 @@
         .footer-section a:hover {
             color: white;
         }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                padding: 0 1rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+        }
     </style>
+
 </head>
 
 <body>
@@ -850,6 +837,7 @@
     </section>
 
 
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -882,11 +870,14 @@
             <p>&copy; 2025 Luxury Grand Hotel. All rights reserved.</p>
         </div>
     </footer>
-      <!-- Simple Footer -->
-    <footer style="background: #2c3e50; color: white; text-align: center; padding: 1rem; font-family: 'Montserrat', sans-serif;">
+    <!-- Simple Footer -->
+    <footer
+        style="background: #2c3e50; color: white; text-align: center; padding: 1rem; font-family: 'Montserrat', sans-serif;">
         <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
             Presented by <strong style="color: #f7ce48;">SHAHMEER</strong> | Web Development Project
         </p>
     </footer>
-    </body>
+
+</body>
+
 </html>
